@@ -1,10 +1,10 @@
 #!python3.9
 
 # queue position enum for specifying the position in the queue
-from datastructures._queue_position import QueuePosition
+from iron_datastructures._queue_position import QueuePosition
 
 # linked list for enhanced queue
-from datastructures.linked_list import LinkedList
+from iron_datastructures.linked_list import LinkedList
 
 # type hinting and some safety
 from typing import Optional, TypeVar, Generic
@@ -168,7 +168,7 @@ class CircularQueue(Generic[T]):
             return _dataToReturn  # we previously guaranteed the list to not be empty with `self.isEmpty()``
         else:
             raise RuntimeError(
-                "Queue was modified outside of package scope - datastructures/circular_queue/circular_queue.py:171"
+                "Queue was modified outside of package scope - iron_datastructures/circular_queue/circular_queue.py:171"
             )
 
     def get(self, position: QueuePosition) -> T:

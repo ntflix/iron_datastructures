@@ -3,7 +3,7 @@
 from typing import Generator, Generic, Optional, TypeVar
 
 # Linked List Node for the list
-from datastructures.linked_list_node import LinkedListNode
+from iron_datastructures.linked_list_node import LinkedListNode
 
 T = TypeVar("T")
 

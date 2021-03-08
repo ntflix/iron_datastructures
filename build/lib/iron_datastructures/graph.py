@@ -4,10 +4,10 @@
 from typing import Generator, Generic, Iterator, List, Optional, TypeVar
 
 # circular queue for breadth first search
-from datastructures.circular_queue import CircularQueue
+from iron_datastructures.circular_queue import CircularQueue
 
 # graph node
-from datastructures.graph_node import Node
+from iron_datastructures.graph_node import Node
 
 T = TypeVar("T")
 

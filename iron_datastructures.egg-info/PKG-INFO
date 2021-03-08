@@ -20,7 +20,7 @@ Description: # iron_datastructures
         
         …to which I say, not so fast! This package is designed with type safety in mind. It is 100% type hinted, to give you that extra peace of mind when writing great code.
         
-        Not only this, but there are of course tests built in! Run them easily with `python3 -m doctest datastructures/*.py` (add a `-v` for extra verbosity!).
+        Not only this, but there are of course tests built in! Run them easily with `python3 -m doctest iron_datastructures/*.py` (add a `-v` for extra verbosity!).
         
         And there's more! This package has useful examples of what you can do with each data structure. Simply take a look at the source files - for example, `circular_queue.py`:
         

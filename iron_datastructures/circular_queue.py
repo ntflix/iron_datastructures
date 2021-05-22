@@ -1,10 +1,10 @@
 #!python3.9
 
 # queue position enum for specifying the position in the queue
-from iron_datastructures._queue_position import QueuePosition
+from _queue_position import QueuePosition
 
 # linked list for enhanced queue
-from iron_datastructures.linked_list import LinkedList
+from linked_list import LinkedList
 
 # type hinting and some safety
 from typing import Optional, TypeVar, Generic
@@ -167,9 +167,7 @@ class CircularQueue(Generic[T]):
         if _dataToReturn is not None:
             return _dataToReturn  # we previously guaranteed the list to not be empty with `self.isEmpty()``
         else:
-            raise RuntimeError(
-                "Queue was modified outside of package scope - iron_datastructures/circular_queue/circular_queue.py:171"
-            )
+            raise RuntimeError("Queue was modified outside of package scope")
 
     def get(self, position: QueuePosition) -> T:
         """Fetch an item from the front or the back of the queue without removing it from the queue
@@ -224,16 +222,16 @@ class CircularQueue(Generic[T]):
         if self.isEmpty():
             raise Exception("Queue is empty")
 
+        data: Optional[T] = None
         if position == QueuePosition.front:
-            return self.__queue[
-                self.__head
-            ]  # type:ignore   # already made sure the queue is not empty
-        elif position == QueuePosition.rear:
-            return self.__queue[
-                self.__tail
-            ]  # type:ignore   # again, it's guaranteed to be safe
+            data = self.__queue[self.__head]
+        elif position == QueuePosition.rear:  # type: ignore # not sure why this is erroneous…
+            data = self.__queue[self.__tail]
 
-        raise Exception("Queue position must be 'front' or 'rear'")
+        if data is not None:
+            return data
+        else:
+            raise Exception("Queue position must be 'front' or 'rear'")
 
     def isEmpty(self) -> bool:
         """Check whether the queue is empty.

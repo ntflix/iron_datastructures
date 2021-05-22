@@ -10,7 +10,7 @@ with open(path.join(this_dir, "readme.md"), encoding="utf-8") as readme:
 
 setup(
     name="iron_datastructures",
-    version="1.02",
+    version="1.1",
     description="A set of useful data structures, including circular queue, binary tree/graph, linked list, and stack.",
     long_description=long_description,
     long_description_content_type="text/markdown",

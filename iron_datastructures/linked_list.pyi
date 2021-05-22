@@ -1,9 +1,9 @@
-from iron_datastructures.linked_list_node import LinkedListNode as LinkedListNode
-from typing import Any, Generator, Optional, TypeVar
+from linked_list_node import LinkedListNode as LinkedListNode
+from typing import Any, Generator, Generic, Optional, TypeVar
 
 T = TypeVar("T")
 
-class LinkedList:
+class LinkedList(Generic[T]):
     def __init__(self, nodes: list[T] = ...) -> None: ...
     def __iter__(self) -> Generator[LinkedListNode[T], None, None]: ...
     def __getitem__(self, key: int) -> T: ...

@@ -4,10 +4,10 @@
 from typing import Generator, Generic, Iterator, List, Optional, TypeVar
 
 # circular queue for breadth first search
-from iron_datastructures.circular_queue import CircularQueue
+from circular_queue import CircularQueue
 
 # graph node
-from iron_datastructures.graph_node import Node
+from graph_node import Node
 
 T = TypeVar("T")
 
@@ -80,10 +80,12 @@ class Graph(Generic[T]):
         return self.__nodes[index].connections
 
     def setNodeData(self, index: int, newValue: T) -> None:
-        for nodeIndex in range(len(self)):
+        for nodeIndex, node in enumerate(
+            self
+        ):  # loop through self's nodes with an index counter as well as current node
             if nodeIndex == index:
                 # set the node data bc index is correct
-                self.__nodes[nodeIndex].data = newValue
+                node.data = newValue
                 # make sure to return so we don't loop over everything!
                 return
         # not found
@@ -110,7 +112,7 @@ class Graph(Generic[T]):
 
         # make a list of nodes of the correct length
         everyNode = [Node[T](None) for _ in range(0, sizeX * sizeY)]
-        return Graph(nodes=everyNode)
+        return Graph[T](nodes=everyNode)
 
     def setNodesFromNodesList(self, nodes: list[Node[T]]) -> None:
         """Set a graph's nodes from a list of nodes.
@@ -159,13 +161,14 @@ class Graph(Generic[T]):
         ['None -> [1, 4]', 'None -> [0, 4]', 'None -> [4, 3]', 'None -> [2, 4]', 'None -> [0, 1, 2, 3]']
         """
 
-        for i in range(len(values)):
+        for index, thisValue in enumerate(values):
             # make new `Node` with this value's data and left and right pointers
-            thisNode: Node[T] = Node(data=values[i], connections=connectionsPointers[i])
+            thisNode: Node[T] = Node(
+                data=thisValue, connections=connectionsPointers[index]
+            )
             self.__nodes.append(thisNode)  # append new node to `self.nodes`
 
     def connectionExistsFrom(self, indexA: int, indexB: int) -> bool:
-
         """Check whether there is a connection from provided node index A to index B.
 
         Args:
@@ -319,12 +322,12 @@ class Graph(Generic[T]):
                 # see PEP 380 Syntax for Delegating to a Subgenerator – https://www.python.org/dev/peps/pep-0380/
                 yield from self.depthFirstTraversal(connectionIndex)
 
-            # check the data is not None and then yield it
             data = self.__nodes[nodeIndex].data
-            if data is not None:
-                yield data  # this was previously guaranteed to be a safe index
 
-    def breadthFirstTraversal(self) -> Iterator[Optional[T]]:
+            if data is not None:
+                yield data
+
+    def breadthFirstTraversal(self) -> Iterator[T]:
         """Iteratively breadth-first traverse the graph.
         Yields data – rather than returning it – because returning values would require more memory.
         `yield` basically pauses the function after yielding, saving all of its states, and only
@@ -389,7 +392,9 @@ class Graph(Generic[T]):
             # pop a node from the queue
             currentNode = visitedNodes.deQueue()
             # and yield it
-            yield currentNode.data  # we previously guaranteed that this value is safe with the while statement
+            data = currentNode.data
+            if data is not None:
+                yield data
 
             # get neighbours of the node
             for neighbour in currentNode.connections:

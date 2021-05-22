@@ -1,10 +1,10 @@
-from typing import Optional, TypeVar
+from typing import Generic, Optional, TypeVar
 
-T = TypeVar('T')
+T = TypeVar("T")
 
-class Node:
+class Node(Generic[T]):
     data: Optional[T]
     connections: list[int]
     visited: bool = ...
-    def __init__(self, data: Optional[T], connections: list[int]=...) -> None: ...
+    def __init__(self, data: Optional[T], connections: list[int] = ...) -> None: ...
     def clone(self) -> Node[T]: ...

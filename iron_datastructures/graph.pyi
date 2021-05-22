@@ -1,10 +1,10 @@
-from iron_datastructures.circular_queue import CircularQueue as CircularQueue
-from iron_datastructures.graph_node import Node as Node
-from typing import Generator, Iterator, List, Optional, TypeVar
+from circular_queue import CircularQueue as CircularQueue
+from graph_node import Node as Node
+from typing import Generator, Generic, Iterator, List, Optional, TypeVar
 
 T = TypeVar("T")
 
-class Graph:
+class Graph(Generic[T]):
     def __init__(self, nodes: Optional[list[Node[T]]] = ...) -> None: ...
     def __iter__(self) -> Generator[Node[T], None, None]: ...
     def __getitem__(self, key: int) -> Optional[T]: ...

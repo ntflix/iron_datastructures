@@ -1,8 +1,8 @@
-from typing import TypeVar
+from typing import Generic, TypeVar
 
-T = TypeVar('T')
+T = TypeVar("T")
 
-class Stack:
+class Stack(Generic[T]):
     def pop(self) -> T: ...
     def peek(self) -> T: ...
     def push(self, item: T) -> None: ...

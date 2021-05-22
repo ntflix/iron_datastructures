@@ -1,10 +1,10 @@
-from iron_datastructures._queue_position import QueuePosition as QueuePosition
-from iron_datastructures.linked_list import LinkedList as LinkedList
-from typing import TypeVar
+from _queue_position import QueuePosition as QueuePosition
+from linked_list import LinkedList as LinkedList
+from typing import Generic, TypeVar
 
 T = TypeVar("T")
 
-class CircularQueue:
+class CircularQueue(Generic[T]):
     def __init__(self, maxSize: int) -> None: ...
     def __len__(self) -> int: ...
     def enQueue(self, item: T) -> None: ...

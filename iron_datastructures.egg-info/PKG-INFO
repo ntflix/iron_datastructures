@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: iron-datastructures
-Version: 1.1
+Version: 1.3
 Summary: A set of useful data structures, including circular queue, binary tree/graph, linked list, and stack.
 Home-page: https://github.com/ntflix/iron_datastructures
 Author: Felix Weber
